@@ -1,37 +1,51 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="java.util.Date" %>
 <html>
-	<head>
-		<link rel = "styLesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-		<title>WelCome</title>
-	</head>
-
+<head>
+<link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<title>WelCome</title>
+</head>
 <body>
-	<nav class = "navbar navbar-expand navbar-dark dg-dark">
-		<div class="container">
-			<a class = "navber-brand" href="./welcome.jsp">HOME</a>
-		</div>
-	</nav>
-	<%!
-	String greeting = "Welcome To Web Shopping Mall";
-	String tagline = "Welcome To Web Market";
-	%>
-	<div class="jumbotron">
-		<div class = "container">
-			<h1 class ="display-3">
-			<%=greeting %>
-			</h1>
-		</div>
-	</div>
+   <%@ include file="menu.jsp" %>
 
-	<div class="container">
-		<div class= "text-center">
-			<h3><%=tagline%>
-			</h3>
-		</div>
-		<hr>
-	</div>
-
-	<footer class="container">
-		<p>&copy; WebMarket</p>
-	</footer>
+   <%!
+      String greeting = "웹 쇼핑몰에 오신 것을 환영합니다";
+      String tagline = "Welcome to Web Market!";
+   %>
+   <div class="jumbotron">
+      <div class = "container">
+         <h1 class="display-3">
+            <%=greeting%>
+         </h1>
+      </div>
+      <hr>
+   </div>
+   
+   <div class="container">
+      <div class = "text-center">
+         <h3>
+            <%=tagline%>
+         </h3>
+         <%
+            response.setIntHeader("Refresh",5);
+            Date day = new java.util.Date();
+            String am_pm;
+            int hour = day.getHours();
+            int minute = day.getMinutes();
+            int second = day.getSeconds();
+            if(hour <= 12){
+               am_pm = "AM";
+            }else{
+               am_pm = "PM";
+               hour = hour-12;
+            }
+            String CT = hour + ":" + minute + ":" + second + " " + am_pm;
+            out.println("현재 접속  시각: " + CT +"\n");
+         %>
+      </div>
+      <hr>
+      <jsp:include page="footer.jsp"/>
+   </div>
+   
 </body>
 </html>
